@@ -60,10 +60,16 @@ public class Chapter_1 {
 
 	/*
 	 * Solution to P1.2 : implement an algorithm to see if one string is a permutation of another
+	 * 
+	 * Runtime: O(N) where N is the length of the longer of the two input strings
 	 */
 	public static boolean isPermutation(String s_1, String s_2) {
 		
 		//Algorithm: count number of occurrences of each letter in each string, if # occurrences match then permutation!
+		
+		if(s_1.length() != s_2.length()) {
+			return false;
+		}
 		
 		int[] charCount = new int[128];
 		
