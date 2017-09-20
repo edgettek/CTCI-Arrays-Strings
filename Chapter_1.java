@@ -27,7 +27,7 @@ public class Chapter_1 {
 	 */
 	public static boolean isUnique(String word) {
 		
-		int[] letterCount = new int[26];
+		int[] letterCount = new int[128];
 		
 		word = word.toLowerCase();
 		
@@ -35,7 +35,6 @@ public class Chapter_1 {
 		
 		for(int i = 0; i < chars.length; i++) {
 			int value = chars[i];
-			value = value-97;
 			
 			if(letterCount[value] > 0) {
 				return false;
