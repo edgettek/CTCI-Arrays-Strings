@@ -13,6 +13,7 @@ public class Chapter_1 {
 		words.add("Renato");
 		words.add("aba");
 		words.add("abc");
+		words.add("Kk");
 		
 		for(String s : words) {
 			System.out.println(s + " is unique? " + isUnique(s));
@@ -28,8 +29,6 @@ public class Chapter_1 {
 	public static boolean isUnique(String word) {
 		
 		int[] letterCount = new int[128];
-		
-		word = word.toLowerCase();
 		
 		char [] chars = word.toCharArray();
 		
