@@ -23,12 +23,38 @@ public class Chapter_1 {
 		
 		// P1.2
 		
-		System.out.println("Are Kyle and elKy permutations? " + isPermutation("Kyle", "elKy"));
-		System.out.println("Are abca and baac permutations? " + isPermutation("abca", "baac"));
-		System.out.println("Are nope and hello permutations? " + isPermutation("nope", "hello"));
-		System.out.println("Are Abc and abc permutations? " + isPermutation("Abc", "abc"));
-		System.out.println("Are GOAT and TAOG permutations? " + isPermutation("GOAT", "TAOG"));
+//		System.out.println("Are Kyle and elKy permutations? " + isPermutation("Kyle", "elKy"));
+//		System.out.println("Are abca and baac permutations? " + isPermutation("abca", "baac"));
+//		System.out.println("Are nope and hello permutations? " + isPermutation("nope", "hello"));
+//		System.out.println("Are Abc and abc permutations? " + isPermutation("Abc", "abc"));
+//		System.out.println("Are GOAT and TAOG permutations? " + isPermutation("GOAT", "TAOG"));
+		
+		// P1.4
+		
+//		ArrayList<String> palindromes = new ArrayList<String>();
+//		
+//		palindromes.add("Kyle");
+//		palindromes.add("aaa");
+//		palindromes.add("taco cat");
+//		palindromes.add("racecar");
+//		palindromes.add("not an option");
+//		palindromes.add("helleh");
+//		palindromes.add("rosh hashanah");
+//		
+//		for(String s : palindromes) {
+//			System.out.println("\"" + s + "\"" + " can be permuted into a palindrome? " + isPermutationPalindrome(s));
+//		}
 
+		ArrayList<String> toBeCompressed= new ArrayList<String>();
+		
+		toBeCompressed.add("aaaa");
+		toBeCompressed.add("aaabbbccaax");
+		toBeCompressed.add("toby");
+		toBeCompressed.add("ggggaagyccc");
+		
+		for(String s : toBeCompressed) {
+			System.out.println("\"" + s + "\"" + " -> " + compressString(s));
+		}
 		
 	}
 	
@@ -99,4 +125,88 @@ public class Chapter_1 {
 		}
 		return true;
 	}
+
+	public static boolean isPermutationPalindrome(String word) {
+		
+		word = word.toLowerCase();
+		word = word.replace(" ", "");
+		
+		int [] charCount = new int[128];
+		
+		char current;
+		int index = -1;
+		for(int i = 0; i < word.length(); i++) {
+			current = word.charAt(i);
+			
+			index = current;
+			
+			charCount[index]++;
+			
+			
+		}
+		
+		int numOdd = 0;
+		
+		for(int i = 0; i < charCount.length; i++) {
+			
+			if(charCount[i] % 2 != 0) {
+				if(numOdd == 0) {
+					numOdd++;
+				}
+				else {
+					return false;
+				}
+			}	
+		}
+		
+		return true;
+		
+	}
+
+	
+	
+	/*
+	 *  Solution to P1.6 : to compress a String based on the number of recurring characters
+	 *  
+	 *  Runtime: O(n) where n is the length of the given string (each character in the string is indexed once)
+	 *  
+	 *  Space complexity: O(n). Worst case scenario the string has no repeating, adjacent characters and the StringBuilder
+	 *  is of length 2n.
+	 */
+	public static String compressString(String word) {
+		
+		char[] chars = word.toCharArray();
+		
+		StringBuilder compressed = new StringBuilder();
+		
+		char lookingFor = chars[0];
+		
+		int count = 1;
+		
+		for(int i = 1; i < chars.length; i++) {
+			if(lookingFor == chars[i]) {
+				count++;
+			}
+			else {
+				compressed.append(lookingFor);
+				compressed.append(count);
+				lookingFor = chars[i];
+				count = 1;
+			}
+		}
+		
+		compressed.append(lookingFor);
+		compressed.append(count);
+		
+		String result = compressed.toString();
+		
+		if(result.length() >= word.length()) {
+			return word;
+		}
+		else {
+			return result;
+		}
+		
+	}
+	
 }
